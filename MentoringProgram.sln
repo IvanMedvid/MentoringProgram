@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MentoringProgram", "MentoringProgram\MentoringProgram.csproj", "{D0433026-177B-46C6-B7E8-ADA614EA2B10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MentoringProgramDAL", "MentoringProgramDAL\MentoringProgramDAL.csproj", "{F252273E-9874-4C4D-B573-720D596239A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0433026-177B-46C6-B7E8-ADA614EA2B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0433026-177B-46C6-B7E8-ADA614EA2B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0433026-177B-46C6-B7E8-ADA614EA2B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0433026-177B-46C6-B7E8-ADA614EA2B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F252273E-9874-4C4D-B573-720D596239A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F252273E-9874-4C4D-B573-720D596239A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F252273E-9874-4C4D-B573-720D596239A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F252273E-9874-4C4D-B573-720D596239A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE14C334-1322-4E6A-8C02-D360F4747508}
+	EndGlobalSection
+EndGlobal
