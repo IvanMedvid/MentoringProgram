@@ -8,9 +8,13 @@ namespace MentoringProgramDAL
 {
     public class MentoringProgramContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
-        public DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
+
+        public MentoringProgramContext()
+        {
+        }
 
         public MentoringProgramContext(DbContextOptions<MentoringProgramContext> options) : base(options)
         {
