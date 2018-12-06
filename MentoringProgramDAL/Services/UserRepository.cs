@@ -36,7 +36,7 @@ namespace MentoringProgramDAL.Services
             var user = GetUserById(id);
             if(user != null)
             {
-                _context.Remove(user);
+                _context.Users.Remove(user);
             }
         }
  
