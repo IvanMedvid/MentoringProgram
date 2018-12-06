@@ -304,5 +304,88 @@ namespace MentoringProgramTest.Services
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
             Assert.AreEqual(true, result);
         }
+
+
+        [Test]
+        public void IsAddressExists_ExistedAddress()
+        {
+            var dataSource = new List<Address> {
+                new Address
+                {
+                    Id = 1,
+                    AddressLine1 = "AddressLine1",
+                    AddressLine2 = "AddressLine2",
+                    AddressLine3 = "AddressLine3",
+                    PostCode = "PostCode"
+                }
+            };
+
+            var address = new Address
+            {
+                Id = 2,
+                AddressLine1 = "AddressLine1",
+                AddressLine2 = "AddressLine2",
+                AddressLine3 = "AddressLine3",
+                PostCode = "PostCode"
+            };
+
+            var data = dataSource.AsQueryable();
+
+            var mockSet = new Mock<DbSet<Address>>();
+            mockSet.As<IQueryable<Address>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Address>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Address>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Address>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            var mockContext = new Mock<MentoringProgramContext>();
+            mockContext.Setup(c => c.Addresses).Returns(mockSet.Object);
+
+            var service = new AddressRepository(mockContext.Object);
+            var result = service.IsAddressExists(address);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(true, result);
+        }
+
+        [Test]
+        public void IsAddressExists_NotExistedAddress()
+        {
+            var dataSource = new List<Address> {
+                new Address
+                {
+                    Id = 1,
+                    AddressLine1 = "AddressLine1",
+                    AddressLine2 = "AddressLine2",
+                    AddressLine3 = "AddressLine3",
+                    PostCode = "PostCode"
+                }
+            };
+
+            var address = new Address
+            {
+                Id = 2,
+                AddressLine1 = "NewAddressLine1",
+                AddressLine2 = "NewAddressLine2",
+                AddressLine3 = "NewAddressLine3",
+                PostCode = "PostCode"
+            };
+
+            var data = dataSource.AsQueryable();
+
+            var mockSet = new Mock<DbSet<Address>>();
+            mockSet.As<IQueryable<Address>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Address>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Address>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Address>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            var mockContext = new Mock<MentoringProgramContext>();
+            mockContext.Setup(c => c.Addresses).Returns(mockSet.Object);
+
+            var service = new AddressRepository(mockContext.Object);
+            var result = service.IsAddressExists(address);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(false, result);
+        }
     }
 }
