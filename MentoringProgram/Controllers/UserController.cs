@@ -64,7 +64,7 @@ namespace MentoringProgram.Controllers
                 throw new Exception("Creating a user failed on save.");
             }
 
-            var userToReturn = Mapper.Map<UserDto>(userEntity);
+            var userToReturn = _mapper.Map<UserDto>(userEntity);
 
             return CreatedAtRoute("GetUser",
                 new { id = userToReturn.Id },
