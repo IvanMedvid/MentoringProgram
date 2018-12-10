@@ -16,10 +16,12 @@ namespace MentoringProgram.Controllers
     public class AddressController : ControllerBase
     {
         private IAddressRepository _addressRepository;
+        private IMapper _mapper;
 
-        public AddressController(IAddressRepository addressRepository)
+        public AddressController(IAddressRepository addressRepository, IMapper mapper)
         {
             _addressRepository = addressRepository;
+            _mapper = mapper;
         }
 
         [HttpGet()]
@@ -27,7 +29,7 @@ namespace MentoringProgram.Controllers
         {
             var addressesFromRepo = _addressRepository.GetAddressList();
 
-            var addresses = Mapper.Map<IEnumerable<AddressDto>>(addressesFromRepo);
+            var addresses = _mapper.Map<IEnumerable<AddressDto>>(addressesFromRepo);
             return Ok(addresses);
         }
 
@@ -41,7 +43,7 @@ namespace MentoringProgram.Controllers
                 return NotFound();
             }
 
-            var address = Mapper.Map<AddressDto>(addressFromRepo);
+            var address = _mapper.Map<AddressDto>(addressFromRepo);
             return Ok(address);
         }
 
@@ -53,7 +55,7 @@ namespace MentoringProgram.Controllers
                 return BadRequest();
             }
 
-            var addressEntity = Mapper.Map<Address>(address);
+            var addressEntity = _mapper.Map<Address>(address);
 
             _addressRepository.AddAddress(addressEntity);
 
@@ -62,7 +64,7 @@ namespace MentoringProgram.Controllers
                 throw new Exception("Creating an address failed on save.");
             }
 
-            var addressToReturn = Mapper.Map<AddressDto>(addressEntity);
+            var addressToReturn = _mapper.Map<AddressDto>(addressEntity);
 
             return CreatedAtRoute("GetAddress",
                 new { id = addressToReturn.Id },
@@ -83,7 +85,7 @@ namespace MentoringProgram.Controllers
                 return NotFound();
             }
 
-            Mapper.Map(address, addressFromRepo);
+            _mapper.Map(address, addressFromRepo);
 
             _addressRepository.UpdateAddress(addressFromRepo);
 

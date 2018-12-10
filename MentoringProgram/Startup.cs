@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using MentoringProgram.Models;
 using MentoringProgramDAL;
 using MentoringProgramDAL.Entities;
@@ -38,6 +39,13 @@ namespace MentoringProgram
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -59,17 +67,6 @@ namespace MentoringProgram
             {
                 app.UseHsts();
             }
-
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Address, AddressDto>();
-
-                cfg.CreateMap<AddressToManipulateDto, Address>();
-
-                cfg.CreateMap<User, UserDto>();
-
-                cfg.CreateMap<UserToManipulateDto, User>();
-            });
 
             app.UseHttpsRedirection();
             app.UseMvc();

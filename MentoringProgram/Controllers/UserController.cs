@@ -16,10 +16,12 @@ namespace MentoringProgram.Controllers
     public class UserController : ControllerBase
     {
         private IUserRepository _userRepository;
+        private IMapper _mapper;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         [HttpGet()]
@@ -27,7 +29,7 @@ namespace MentoringProgram.Controllers
         {
             var usersFromRepo = _userRepository.GetUserList();
 
-            var users = Mapper.Map<IEnumerable<UserDto>>(usersFromRepo);
+            var users = _mapper.Map<IEnumerable<UserDto>>(usersFromRepo);
             return Ok(users);
         }
 
@@ -41,7 +43,7 @@ namespace MentoringProgram.Controllers
                 return NotFound();
             }
 
-            var user = Mapper.Map<UserDto>(userFromRepo);
+            var user = _mapper.Map<UserDto>(userFromRepo);
             return Ok(user);
         }
 
@@ -53,7 +55,7 @@ namespace MentoringProgram.Controllers
                 return BadRequest();
             }
 
-            var userEntity = Mapper.Map<User>(user);
+            var userEntity = _mapper.Map<User>(user);
 
             _userRepository.AddUser(userEntity);
 
@@ -83,7 +85,7 @@ namespace MentoringProgram.Controllers
                 return NotFound();
             }
 
-            Mapper.Map(user, userFromRepo);
+            _mapper.Map(user, userFromRepo);
 
             _userRepository.UpdateUser(userFromRepo);
 
