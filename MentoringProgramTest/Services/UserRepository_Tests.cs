@@ -259,7 +259,7 @@ namespace MentoringProgramTest.Services
             
             mockSet.Verify(m => m.Add(It.IsAny<User>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
-            Assert.AreEqual(false, result);
+            Assert.AreEqual(true, result);
         }
     }
 }
