@@ -13,6 +13,7 @@ namespace MentoringProgramTest.Services
     [TestFixture]
     public class UserRepository_Tests
     {
+
         private static object[] _userListDataSource =
         {
             new object[] { new List<User>() },
